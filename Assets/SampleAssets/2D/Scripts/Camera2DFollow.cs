@@ -12,6 +12,9 @@ namespace UnitySampleAssets._2D
         public float lookAheadReturnSpeed = 0.5f;
         public float lookAheadMoveThreshold = 0.1f;
 
+		public float centerX = 0f;
+		public float centerY = 0f;
+
         private float offsetZ;
         private Vector3 lastTargetPosition;
         private Vector3 currentVelocity;
@@ -44,6 +47,10 @@ namespace UnitySampleAssets._2D
             }
 
             Vector3 aheadTargetPos = target.position + lookAheadPos + Vector3.forward*offsetZ;
+			// We may want to change the center using a offset
+			aheadTargetPos.x += centerX;
+			aheadTargetPos.y += centerY;
+
             Vector3 newPos = Vector3.SmoothDamp(transform.position, aheadTargetPos, ref currentVelocity, damping);
 
             transform.position = newPos;
